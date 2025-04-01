@@ -29,4 +29,6 @@ void loop()
 			frame++;//Advance frame tracker 
 		}//End of if switch closed 
 	}//End of fingerman 
+	
+	//Add full story completion checking code here
 }//End of loop 
