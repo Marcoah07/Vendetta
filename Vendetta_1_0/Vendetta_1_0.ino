@@ -13,6 +13,7 @@ void setup()
 	Serial.begin(9600);//Talk to serial display 
 	servoBailey.attach(9); //Attach servo to pin
 	pinMode(ledDoor, OUTPUT);
+	pinMode(ledBailey, OUTPUT);
 }
 
 void loop()
@@ -22,7 +23,7 @@ void loop()
 		servoDoor.write(0);
 		if (digitalRead(switchDoor) == HIGH){//Token is in starting place 
 			digitalWrite(ledDoor, HIGH);
-			frame++;}//Advance tracker
+d			frame++;}//Advance tracker
 	}//End of reset 
 	
 	//Larkhill 
@@ -32,6 +33,17 @@ void loop()
 			frame++;//Advance frame tracker 
 		}//End of if token removed 
 	}//End of Larkhill 
+	
+	//Old Bailey
+	if (frame == 2){
+		if (digitalRead(switchBailey) == HIGH){//Token is placed
+			for(int pos = 0; pos <= 90; pos++){//Platform sweep 
+				servoBailey.write(pos);//Move the servo 
+				delay(11);//To complete 90° in roughly 1 second 
+			}//End of sweep 
+			digitalWrite(ledBailey, HIGH);//Bailey explodes 
+		}//End of token trigger 
+	}//End of old bailey 
 	
 	//Add full story completion checking code here
 }//End of loop 
