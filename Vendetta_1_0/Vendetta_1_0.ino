@@ -20,10 +20,10 @@ void loop()
 {
 	//Initialize positions and states
 	if (frame == 0){
-		servoDoor.write(0);
+		servoBailey.write(0);
 		if (digitalRead(switchDoor) == HIGH){//Token is in starting place 
 			digitalWrite(ledDoor, HIGH);
-d			frame++;}//Advance tracker
+			frame++;}//Advance tracker
 	}//End of reset 
 	
 	//Larkhill 
