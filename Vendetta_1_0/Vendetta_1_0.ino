@@ -11,7 +11,7 @@ int frame = 0;//Track the active story frame
 void setup()
 {
 	Serial.begin(9600);//Talk to serial display 
-	servoDoor.attach(9); //Attach servo to pin
+	servoBailey.attach(9); //Attach servo to pin
 	pinMode(ledDoor, OUTPUT);
 }
 
