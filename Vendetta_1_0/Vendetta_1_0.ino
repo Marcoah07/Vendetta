@@ -1,4 +1,5 @@
 //This program handles sequencial interactions for the project 
+//Reminder: Test servo code for first story frame + create code architecture for tracking story events.
 
 #include <Servo.h>//Servo library 
 
