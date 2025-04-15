@@ -24,7 +24,7 @@ void setup()
 void loop()
 {
 	//Initialize positions and states
-	if (frame == 0){
+	if (frame == 0 && storyComplete){
 		servoBailey.write(0);
 		servoDance.write(0);
 		servoTrain.write(0);
