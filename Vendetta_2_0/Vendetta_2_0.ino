@@ -24,15 +24,16 @@ void setup()
 void loop()
 {
 	//Initialize positions and states
-	if (frame == 0 && storyComplete){
-		servoBailey.write(0);
-		servoDance.write(0);
-		servoTrain.write(0);
-		servoFire.write(0);
+	if (frame == 0){
+		if (storyComplete){
+			servoBailey.write(0);
+			servoDance.write(0);
+			servoTrain.write(0);
+			servoFire.write(0);
+			storyComplete =\ false;}
 		if (digitalRead(switchDoor) == HIGH){//Token is in starting place 
 			digitalWrite(ledDoor, HIGH);
 			frame = 1;;}//Advance tracker
-		storyComplete = false;
 	}//End of reset 
 	
 	//Larkhill 
