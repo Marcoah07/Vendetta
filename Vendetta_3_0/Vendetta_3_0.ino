@@ -6,9 +6,9 @@
 //variables
 Servo servoBailey, servoDance, servoTrain, servoFire;//We can add more servo objects as needed
 int switchDoor = 7, switchBailey = 8, switchRoses = 12, switchDance = 11, switchTrain = 13;//Pins for switches
-int ledDoor = 2, ledBailey = 3, ledRain = 4;//Pin for led1 
+int ledDoor = 2, ledBailey = 1, ledRain = 4;//Pin for led1 
 int frame = 0;//Track the active story frame
-int buzzer;//Pin for piezo 
+int buzzer = 3;//Pin for piezo 
 bool storyComplete = true;
 bool playing = true;//Decide whether music should play 
 int currentNote = 0;//Track melody note
@@ -37,6 +37,8 @@ void loop()
 			servoTrain.write(0);
 			servoFire.write(0);
 			noTone(buzzer);
+			playing = true;
+			currentNote = 0;
 			storyComplete = false;}
 		if (digitalRead(switchDoor) == HIGH){//Token is in starting place 
 			digitalWrite(ledDoor, HIGH);
@@ -65,7 +67,8 @@ void loop()
 			play(melodyBailey, 15, numNotesBailey, true);
 		}//End of token trigger 
 		if (digitalRead(switchRoses) == HIGH){//if roses are in place 
-		frame = 3;}
+			currentNote = 0;
+			frame = 3;}
 	}//End of old bailey 
 	
 	//Roses
@@ -81,6 +84,7 @@ void loop()
 		//servo code 
 		play(melodyDance, 160, numNotesDance, true);
 		if (digitalRead(switchTrain) == HIGH){//Advance story upon next switch being closed 
+			currentNote = 0;
 			frame = 5;}
 }//End of Dance 
 	
@@ -98,6 +102,8 @@ void loop()
 	if (frame == 6 && digitalRead(switchBailey) == LOW && digitalRead(switchRoses) == LOW && digitalRead(switchDance) == LOW && digitalRead(switchTrain) == LOW){
 	frame = 0;
 	storyComplete = true;}//Restart 
+	
+	Serial.println(frame);
 	
 }//End of loop           
 
