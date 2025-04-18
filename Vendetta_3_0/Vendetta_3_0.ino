@@ -7,7 +7,7 @@
 Servo servoBailey, servoDance, servoTrain, servoFire;//We can add more servo objects as needed
 int switchDoor = 7, switchBailey = 8, switchRoses = 12, switchDance = 11, switchTrain = 13;//Pins for switches
 int ledDoor = 2, ledBailey = 1, ledRain = 4;//Pin for led1 
-int frame = 0;//Track the active story frame
+int frame = 2;//Track the active story frame
 int buzzer = 3;//Pin for piezo 
 bool storyComplete = true;
 bool playing = true;//Decide whether music should play 
@@ -69,7 +69,7 @@ void loop()
 				}//End of sweep 
 			}//End of if motion incomplete 
 			digitalWrite(ledBailey, HIGH);//Bailey explodes 
-			play(melodyBailey, 15, numNotesBailey, true);
+			play(melodyBailey, numNotesBailey, 30, true);
 		}//End of token trigger 
 		if (digitalRead(switchRoses) == HIGH){//if roses are in place 
 			currentNote = 0;
@@ -87,7 +87,7 @@ void loop()
 	if (frame == 4){
 		digitalWrite(ledRain, LOW);
 		//servo code 
-		play(melodyDance, 160, numNotesDance, true);
+		play(melodyDance, numNotesDance, 160, true);
 		if (digitalRead(switchTrain) == HIGH){//Advance story upon next switch being closed 
 			currentNote = 0;
 			frame = 5;}
@@ -97,7 +97,7 @@ void loop()
 	if (frame == 5){
 		servoTrain.write(180);
 		servoFire.write(180);
-		play(melodyParli, 15, numNotesParli, false);
+		play(melodyParli, numNotesParli, 45, false);
 		if (!playing){
 		frame == 6;}
 	}//End of parliament 
