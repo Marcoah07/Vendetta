@@ -25,6 +25,11 @@ void setup()
 	pinMode(ledBailey, OUTPUT);
 	pinMode(ledRain, OUTPUT);
 	pinMode(buzzer, OUTPUT);
+	pinMode(switchDoor, INPUT);
+	pinMode(switchBailey, INPUT);
+	pinMode(switchRoses, INPUT);
+	pinMode(switchDance, INPUT);
+	pinMode(switchTrain, INPUT);
 }
 
 void loop()
