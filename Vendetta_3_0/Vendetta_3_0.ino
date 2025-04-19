@@ -11,6 +11,7 @@ int frame = 0;//Track the active story frame
 int buzzer = 3;//Pin for piezo 
 bool storyComplete = true;
 bool playing = true;//Decide whether music should play 
+bool sweepUp = true;//Track the direction of a servo's movement (only for dance)
 int currentNote = 0;//Track melody note
 unsigned long prevNote = 0;//Millis timer for note duration 
 unsigned long prevAngle = 0;//Millis timer for servo angles 
@@ -90,7 +91,16 @@ void loop()
 	
 	//Dance 
 	if (frame == 4){
-		//servo code 
+		if (sweepUp){//Servo is sweeping in the positive direction 
+			sweep(servoDance, 60, 120, 20);
+			if (servoDance.read() == 120){//Turn 
+				sweepUp = !sweepUp;}
+		}//End of sweepUp
+		else {//Sweep down 
+			sweep(servoDance, 120, 60, 20);
+			if (servoDance.read() == 90){//Turn	
+				sweepUp = !sweepUp;}
+		}//End of servo 
 		play(melodyDance, numNotesDance, 160, true);
 		if (digitalRead(switchTrain) == HIGH){//Advance story upon next switch being closed 
 			currentNote = 0;
@@ -99,11 +109,12 @@ void loop()
 	
 	//Parliament
 	if (frame == 5){
-		servoTrain.write(180);
-		servoFire.write(180);
-		play(melodyParli, numNotesParli, 45, false);
+		sweep(servoTrain, 0, 90, 20);
+		sweep(servoFire, 0, 120, 20);
+		if (servoTrain.read() > 45){
+			play(melodyParli, numNotesParli, 45, false);}
 		if (!playing){
-		frame == 6;}
+			frame == 6;}
 	}//End of parliament 
 	
 	
@@ -132,7 +143,7 @@ void play(int melody[], int melodyLength, int noteLength, bool looping)
 			tone(buzzer, melody[currentNote]);  //piezo output
 		
 		//restart melody if it is complete
-		if (currentNote > melodyLength- 1){
+if 	(currentNote > melodyLength- 1){
 			currentNote = 0;
 			if (!looping){
 				playing = false;}
