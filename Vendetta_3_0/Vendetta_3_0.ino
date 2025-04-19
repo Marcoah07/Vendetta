@@ -143,7 +143,7 @@ void play(int melody[], int melodyLength, int noteLength, bool looping)
 //This function sweeps the servo without delay()
 void sweep(Servo servo, int angle1, int angle2, int delay)
 {
-	pos = servo.read();//Get current angle 
+	int pos = servo.read();//Get current angle 
 	
 	unsigned long currentMillis = millis();  //get the time the program has been running for in millis
 	
