@@ -57,4 +57,14 @@ const int melodyDance[] = {
 
 const int numNotesDance = sizeof(melodyDance)/sizeof(melodyDance[0]);
 
+const int melodyRoses[] = {
+	0,
+	NOTE_C5, NOTE_C5, 0, NOTE_C5, 0, NOTE_C5,
+	NOTE_C5, NOTE_C5, 0, NOTE_DS5, 0, NOTE_D5,
+	NOTE_D5, NOTE_D5, NOTE_C5, NOTE_C5, 0, NOTE_AS4,
+	NOTE_C5, NOTE_C5, NOTE_C5, 0,0,
+};
+
+const int numNotesRoses = sizeof(melodyRoses)/sizeof(melodyRoses[0]);
+
 #endif
