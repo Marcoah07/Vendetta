@@ -110,7 +110,8 @@ void loop()
 	//Parliament
 	if (frame == 5){
 		sweep(servoTrain, 0, 90, 20);
-		sweep(servoFire, 0, 120, 20);
+		if (servoTrain.read() >= 90){
+			sweep(servoFire, 0, 120, 20);}
 		if (servoTrain.read() > 45){
 			play(melodyParli, numNotesParli, 45, false);}
 		if (!playing){
