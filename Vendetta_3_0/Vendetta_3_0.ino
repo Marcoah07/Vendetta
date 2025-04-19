@@ -24,7 +24,6 @@ void setup()
 	servoFire.attach(6);
 	pinMode(ledDoor, OUTPUT);
 	pinMode(ledBailey, OUTPUT);
-	pinMode(ledRain, OUTPUT);
 	pinMode(buzzer, OUTPUT);
 	pinMode(switchDoor, INPUT);
 	pinMode(switchBailey, INPUT);
@@ -140,3 +139,21 @@ void play(int melody[], int melodyLength, int noteLength, bool looping)
 		}//End of loop music 
 	}//End of if playing 
 }//End of play()
+
+//This function sweeps the servo without delay()
+void sweep(Servo servo, int angle1, int angle2, int delay)
+{
+	pos = servo.read();//Get current angle 
+	
+	unsigned long currentMillis = millis();  //get the time the program has been running for in millis
+	
+	if (pos != angle2){//Only run if servo still needs to move 
+		if (currentMillis - prevAngle >= delay) {
+			if (angle1 > angle2){//Backward movement 
+				servo.write(angle2+pos-1);}
+			else{//Forward movement 
+				servo.write(angle1+pos+1);}
+			prevAngle = currentMillis; //update note length timer
+		}//End of if interval completes 
+	}//End of if servo has not reached angle2 
+}//End of sweep()
