@@ -38,11 +38,11 @@ void loop()
 	//Initialize positions and states
 	if (frame == 0){
 		if (storyComplete){
-			servoBailey.write(75);
+		servoBailey.write(69);
 			servoDance.write(60);
 			servoTrain.write(170);
 			servoFire.write(0);
-			noTone(buzzer);
+	noTone(buzzer);
 			playing = true;
 			currentNote = 0;
 			storyComplete = false;}
@@ -54,7 +54,7 @@ void loop()
 	//Larkhill 
 	if (frame == 1){
 		if (digitalRead(switchDoor) == LOW){//Once token is removed
-			delay(100);
+			delay(2000);
 			if (digitalRead(switchDoor) == LOW){//After delay 
 				digitalWrite(ledDoor, LOW);//Turn off led 
 				frame = 2;;//Advance frame tracker 
