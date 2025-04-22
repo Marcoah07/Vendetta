@@ -116,7 +116,7 @@ void loop()
 	if (frame == 5){
 		sweep(servoTrain, 170, 100, 20);
 		if (servoTrain.read() <= 100){//Wait for train to reach parliament for fire to spread 
-			sweep(servoFire, 0, 10, 20);}
+			sweep(servoFire, 0, 120, 20);}
 		if (servoTrain.read() < 135){//Wait for train to travel half way before music plays 
 			play(melodyParli, numNotesParli, 45, false);}
 		if (!playing){
