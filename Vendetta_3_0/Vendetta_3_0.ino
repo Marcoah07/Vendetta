@@ -54,7 +54,7 @@ noTone(buzzer);
 	//Larkhill 
 	if (frame == 1){
 		if (digitalRead(switchDoor) == LOW){//Once token is removed
-			delay(2000);
+			delay(5000);
 			if (digitalRead(switchDoor) == LOW){//After delay 
 				digitalWrite(ledDoor, LOW);//Turn off led 
 				frame = 2;;//Advance frame tracker 
