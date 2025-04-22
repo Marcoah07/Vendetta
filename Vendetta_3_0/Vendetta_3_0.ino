@@ -73,17 +73,15 @@ void loop()
 				}//End of sweep 
 			}//End of if motion incomplete 
 		}//End of token trigger 
-		
 		if (servoBailey.read() == 160){
 			digitalWrite(ledBailey, HIGH);//Bailey explodes 
 			play(melodyBailey, numNotesBailey, 30, false);
 			Serial.println(currentNote);
+			if (digitalRead(switchRoses) == HIGH){//if roses are in place 
+				currentNote = 0;
+				playing = true;
+				frame = 3;}//Only read if interaction has triggered 
 		}//End of if servo points up 
-		
-		if (digitalRead(switchRoses) == HIGH){//if roses are in place 
-			currentNote = 0;
-			playing = true;
-			frame = 3;}
 	}//End of old bailey 
 	
 	//Roses
