@@ -38,9 +38,9 @@ void loop()
 	//Initialize positions and states
 	if (frame == 0){
 		if (storyComplete){
-			servoBailey.write(0);
-			servoDance.write(0);
-			servoTrain.write(0);
+			servoBailey.write(75);
+			servoDance.write(60);
+			servoTrain.write(170);
 			servoFire.write(0);
 			noTone(buzzer);
 			playing = true;
@@ -63,20 +63,23 @@ void loop()
 	//Old Bailey
 	if (frame == 2){
 		if (digitalRead(switchBailey) == HIGH){//Token is placed
-			if (servoBailey.read() < 90){
-				for(int pos = 0; pos <= 90; pos++){//Platform sweep 
+			if (servoBailey.read() < 160){
+				for(int pos = 75; pos <= 160; pos++){//Platform sweep 
 					servoBailey.write(pos);//Move the servo 
 					delay(11);//To complete 90° in roughly 1 second 
 				}//End of sweep 
 			}//End of if motion incomplete 
-			digitalWrite(ledBailey, HIGH);//Bailey explodes 
-			play(melodyBailey, numNotesBailey, 30, true);
-		Serial.println(currentNote);
 		}//End of token trigger 
-		else {//Silence the buzzer
-			noTone(buzzer);}
+		
+		if (servoBailey.read() == 160){
+			digitalWrite(ledBailey, HIGH);//Bailey explodes 
+			play(melodyBailey, numNotesBailey, 30, false);
+			Serial.println(currentNote);
+		}//End of if servo points up 
+		
 		if (digitalRead(switchRoses) == HIGH){//if roses are in place 
 			currentNote = 0;
+			playing = true;
 			frame = 3;}
 	}//End of old bailey 
 	
@@ -99,7 +102,7 @@ void loop()
 		}//End of sweepUp
 		else {//Sweep down 
 			sweep(servoDance, 120, 60, 20);
-			if (servoDance.read() == 90){//Turn	
+			if (servoDance.read() == 60){//Turn	
 				sweepUp = !sweepUp;}
 		}//End of servo 
 		play(melodyDance, numNotesDance, 160, true);
@@ -111,10 +114,10 @@ void loop()
 	
 	//Parliament
 	if (frame == 5){
-		sweep(servoTrain, 0, 90, 20);
-		if (servoTrain.read() >= 90){//Wait for train to reach parliament for fire to spread 
-			sweep(servoFire, 0, 120, 20);}
-		if (servoTrain.read() > 45){//Wait for train to travel half way before music plays 
+		sweep(servoTrain, 170, 100, 20);
+		if (servoTrain.read() <= 100){//Wait for train to reach parliament for fire to spread 
+			sweep(servoFire, 0, 10, 20);}
+		if (servoTrain.read() < 135){//Wait for train to travel half way before music plays 
 			play(melodyParli, numNotesParli, 45, false);}
 		if (!playing){
 			frame == 6;}
