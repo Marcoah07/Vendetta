@@ -48,15 +48,18 @@ void loop()
 			storyComplete = false;}
 		if (digitalRead(switchDoor) == HIGH){//Token is in starting place 
 			digitalWrite(ledDoor, HIGH);
-			frame = 1;;}//Advance tracker
+			frame = 1;}//Advance tracker
 	}//End of reset 
 	
 	//Larkhill 
 	if (frame == 1){
 		if (digitalRead(switchDoor) == LOW){//Once token is removed
-			digitalWrite(ledDoor, LOW);//Turn off led 
-			frame = 2;;//Advance frame tracker 
-			playing = true;//Prepare to play music 
+			delay(100);
+			if (digitalRead(switchDoor) == LOW){//After delay 
+				digitalWrite(ledDoor, LOW);//Turn off led 
+				frame = 2;;//Advance frame tracker 
+				playing = true;//Prepare to play music 
+			}//End of after delay 
 		}//End of if token removed 
 	}//End of Larkhill
 	
