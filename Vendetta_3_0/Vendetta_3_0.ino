@@ -42,7 +42,7 @@ void loop()
 			servoDance.write(60);
 			servoTrain.write(170);
 			servoFire.write(0);
-	noTone(buzzer);
+noTone(buzzer);
 			playing = true;
 			currentNote = 0;
 			storyComplete = false;}
@@ -115,10 +115,10 @@ void loop()
 	
 	//Parliament
 	if (frame == 5){
-		sweep(servoTrain, 170, 100, 20);
-		if (servoTrain.read() <= 100){//Wait for train to reach parliament for fire to spread 
+		sweep(servoTrain, 170, 120, 40);
+		if (servoTrain.read() <= 120){//Wait for train to reach parliament for fire to spread 
 			sweep(servoFire, 0, 120, 20);}
-		if (servoTrain.read() < 135){//Wait for train to travel half way before music plays 
+		if (servoTrain.read() < 145){//Wait for train to travel half way before music plays 
 			play(melodyParli, numNotesParli, 45, false);}
 		if (!playing){
 			frame == 6;}
@@ -168,10 +168,10 @@ void sweep(Servo servo, int angle1, int angle2, int delay)
 	if (pos != angle2){//Only run if servo still needs to move 
 		if (currentMillis - prevAngle >= delay) {
 			if (angle1 > angle2){//Backward movement 
-				servo.write(angle1-(angle1-pos)-1);}
+			servo.write(angle1-(angle1-pos)-1);}
 			else{//Forward movement 
 				servo.write(angle1+(pos-angle1)+1);}
 			prevAngle = currentMillis; //update note length timer
 		}//End of if interval completes 
 	}//End of if servo has not reached angle2 
-}//End of sweep()
+}//End of sweep
